@@ -25,3 +25,20 @@ Linux system:
     - [ab] here it is or a or b 
     - [1-9] here it is from 1 to 9
     - [!ab] does not include a or b
+
+- touch:
+    - to create a file use 
+- cp:
+    - to copy a file
+    - cp -R /folder/ /anotherFolder
+
+- mv:
+    - to move file 
+
+- mkdir -p :
+    - to make parent directory and child directory 
+
+- tail -n 1:
+    - read the last line in a file
+- head -2 :
+    - read the first two line in a file
