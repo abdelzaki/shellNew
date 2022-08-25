@@ -1,1 +1,27 @@
-# shellNew
+Linux system:
+    - kernel    
+    - GNU utilities
+    - application
+    - graphical desktop
+
+- job of the kernel:
+    - memory managment
+    - hardware managment
+    - file system managment
+    - process managment
+
+- initProcess:
+    - kernel creates the first process called init and run it
+    - process which might start automatically are in some locations
+        - first option is: /etc/inittabs 
+        - /etc/init.d folder contain scripts which would start at the begining of the system
+        - scripts are started via entries under /etc/rcX.d  
+
+- ls:
+    - to show all files in the directoy use ls 
+    - to show hidden file use ls -a
+    - to recursive the folder ls -R
+    -  to get the long name with filter ls -l my* 
+    - [ab] here it is or a or b 
+    - [1-9] here it is from 1 to 9
+    - [!ab] does not include a or b
