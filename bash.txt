@@ -59,14 +59,6 @@ Linux system:
 - umount:
     - unmout device 
 
-- grep:
-    - search for pattern
-    - grep options pattern file 
-    - grep -v :
-        - show lines which do not match the pattern  
-    - to specifiy more than one match use -e more than one time
-        - grep -e abdel -e ahmed file.txt
-
 - to show the enviroment variables:
     - printenv : would show all the variable 
 
@@ -126,7 +118,7 @@ Linux system:
 - to run in background script&
 
 - sed:
-    - s = substitue, i = insert before, a = insert after
+    - s = substitue, i = insert before, a = insert after , -n /p to print the mathced lines
     - stream editor to change data
     - it apply command to standard input 
     - sed option script file 
@@ -139,11 +131,56 @@ Linux system:
         - sed "s/old/new/g" file.txt
     - to select the line which u would substitue
         - sed "2,3s/old/new/" -> would apply only to line 2 and 3
-    - to skip charachter use \
+    - to skip character use \
         - sed "s/\/etc\/pass/\/newetc\/newpassword/"
     - to delete a specifie line use d   
         - sed "/old/d" -> remember there is no s at the begining 
     - to delete any lines between lines
         - sed "/startmatch/,/stopmatch/d"
     - to append data use i  
-        sed -i "s/old/new/" file.txt
+        sed -i "s/old/new/" file.txt^
+    - sed -n "/expression/p"
+
+- awk:
+    - print first word of each line
+        awk '{print $1}' file  -> it should be single ' not " 
+    - to change seperator:
+        awk -F, or awk -F- -> change seperator to , or - 
+
+- regular expression:
+    - ^start :start with
+    - end$ : end with
+    - ^$ : empty lines
+    - . : any character
+    - [] : or and it represent one character
+    - [^] : not character
+    - [1-9] : range
+    - *: means the character before it should appear at least one time
+        - sed -n "/th*dfs"/p -> h here is optional
+    - [1-9]* : match numbers with undefined length
+    - + means at least one
+    - ? zero or one 
+    - to work on the line after the line u found 
+        - sed "/header/{n ; d}" data1.txt
+    - span of character:
+        *+?:
+            - * : 11*0 : 10 110 11110 1111110
+        - | : 
+            - or
+            - linux|unix 
+        - () :
+            - group the pattern
+            - (yes|Yes) 
+         
+- grep:
+    - print the matched expression
+    - grep -i : case insenstive
+    - grep -v : not match
+    - grep "expression" file
+    - -E to use regular expression
+    - search for pattern
+    - grep options pattern file 
+    - grep -v :
+        - show lines which do not match the pattern  
+    - to specifiy more than one match use -e more than one time
+        - grep -e abdel -e ahmed file.txt
