@@ -120,3 +120,30 @@ Linux system:
         - u can use double bracket to support regular expression
 
 - to get user input use $1, $2, $3 so on
+
+- Signals:
+    - SIGKILL = 9 = uncondiotional kill
+- to run in background script&
+
+- sed:
+    - s = substitue, i = insert before, a = insert after
+    - stream editor to change data
+    - it apply command to standard input 
+    - sed option script file 
+    - sed "s/oldword/newword/"
+    - u can give a file to a sed
+    - sed "s/old/new/" file.txt
+    - to make more than one substitue option 
+        sed -e "s/old1/new/1; s/old2/new2/" data.txt
+    - to make global substitue per line 
+        - sed "s/old/new/g" file.txt
+    - to select the line which u would substitue
+        - sed "2,3s/old/new/" -> would apply only to line 2 and 3
+    - to skip charachter use \
+        - sed "s/\/etc\/pass/\/newetc\/newpassword/"
+    - to delete a specifie line use d   
+        - sed "/old/d" -> remember there is no s at the begining 
+    - to delete any lines between lines
+        - sed "/startmatch/,/stopmatch/d"
+    - to append data use i  
+        sed -i "s/old/new/" file.txt
