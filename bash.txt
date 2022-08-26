@@ -42,3 +42,81 @@ Linux system:
     - read the last line in a file
 - head -2 :
     - read the first two line in a file
+
+- kill:
+    - send signal tp process based on PID 
+    - defualt send TERM signal
+    - ex:   
+        - kill 3490
+- killall:
+    - send singal based on name
+
+- mount:
+    - if u are not using disturbuation u have to do mount and unmout ur self
+    - mount by itself would show the mounted devices on the system
+    - mount -t type -o option1,option2 src foldertoMountOn
+
+- umount:
+    - unmout device 
+
+- grep:
+    - search for pattern
+    - grep options pattern file 
+    - grep -v :
+        - show lines which do not match the pattern  
+    - to specifiy more than one match use -e more than one time
+        - grep -e abdel -e ahmed file.txt
+
+- to show the enviroment variables:
+    - printenv : would show all the variable 
+
+- var1=value1:
+    - to set local variable in a process
+- $var1:
+    - to read the the variable
+
+- $PATH:
+    - directory where the linux search for command
+    - to add extra PATH
+        - PATH=$PATH:/newpath/..
+
+- linux file system:
+    - ext filesystem is the basic file sysem for linux
+    - journaling file system:
+        - u write the change first in temp file and then write the data in inode table
+
+- to get the output from script in another script use x = $(script)
+    - testing=$(date)
+- $? :
+    - to get the exit value of the last script
+    - exit 123
+
+- if statment:
+    - one way:
+        if condition
+        then 
+            command 
+        elif condition
+        then    
+            command
+        else 
+            command 
+        fi
+    - another way:
+        if condition; then
+            command 
+        fi
+    comparison u have to give space between bracket [ $x1 -eq $x2 ]:
+        -eq -ne -le -ge -gt -lt 
+        if [ 1 le 2 ] 
+        then 
+    - working with string:
+        -n means not empty
+        -z means empty
+        -d directory
+        -f file
+        -e exits
+    - [[ $var = r* ]]
+        - u can use double bracket to support regular expression
+
+- to get user input use $1, $2, $3 so on
