@@ -11,43 +11,31 @@ Linux system:
     - process managment
 
 - shell :
-    - read instruction and convert it to something the OS would understand 
-- initProcess:
-    - kernel creates the first process called init and run it
-    - process which might start automatically are in some locations
-        - first option is: /etc/inittabs 
-        - /etc/init.d folder contain scripts which would start at the begining of the system
-        - scripts are started via entries under /etc/rcX.d  
+    - read instruction and convert it to something the OS would understand
 
-- ls:
-    - to show all files in the directoy use ls 
-    - to show hidden file use ls -a
-    - to recursive the folder ls -R
-    -  to get the long name with filter ls -l my* 
-    - [ab] here it is or a or b 
-    - [1-9] here it is from 1 to 9
-    - [!ab] does not include a or b
+- "" -> shell can substitue command
+- '' -> raw string
 
-- touch:
-    - to create a file use 
-- cp:
-    - to copy a file
-    - cp -R /folder/ /anotherFolder
+commands:
+    - ls:
+        - to show all files in the directoy use ls 
+        - to show hidden file use ls -a
+        - to recursive the folder ls -R
+        -  to get the long name with filter ls -l my* 
+        - [ab] here it is or a or b 
+        - [1-9] here it is from 1 to 9
+        - [!ab] does not include a or b
+        - -1 : show the content of the folder every line represent file 
 
-- mv:
-    - to move file 
+    - find location -name 
+        - ex:
+            - find . -name "ahmed"
+            - find / . -name  "*.c" 
 
-- mkdir -p :
-    - to make parent directory and child directory 
-
-- find location -name 
-    - ex:
-        - find . -name "ahmed"
-        - find / . -name  "*.c" 
-- if the file doesnot take from standard input and u want to direct an input to it
-    - find . -name="*.c" | rm -> wont work as rm doesnot accept standard input 
-    the soulution is usinf $()
-    - rm $(find . -name "*.c")
+    - if the command doesnot take from standard input and u want to direct an input to it
+        - find . -name="*.c" | rm -> wont work as rm doesnot accept standard input 
+        - the soulution is usinf $()
+            - rm $(find . -name "*.c")
 
 - tail -n 1:
     - read the last line in a file
@@ -55,6 +43,19 @@ Linux system:
     - skip the first 2 and keep reading 
 - head -2 :
     - read the first two line in a file
+
+
+    - touch:
+        - to create a file use 
+    - cp:
+        - to copy a file
+        - cp -R /folder/ /anotherFolder
+
+    - mv:
+        - to move file 
+
+    - mkdir -p :
+        - to make parent directory and child directory 
 
 - kill:
     - send signal tp process based on PID 
@@ -72,40 +73,19 @@ Linux system:
 - umount:
     - unmout device 
 
-- cat:
-    - write the data which is from standard input to standard output
-
 - echo:
     - '' or "" to make the string is processed as string not as a special character
-- to show the enviroment variables:
-    - printenv : would show all the variable 
-
-- var1=value1:
-    - to set local variable in a process
-- $var1:
-    - to read the the variable
-
-- $PATH:
-    - directory where the linux search for command
-    - to add extra PATH
-        - PATH=$PATH:/newpath/..
-
-- linux file system:
-    - ext filesystem is the basic file sysem for linux
-    - journaling file system:
-        - u write the change first in temp file and then write the data in inode table
-
-- to get the output from script in another script use x = $(script)
-    - testing=$(date)
-- $? :
-    - to get the exit value of the last script
-    - exit 123
-- "$@" "$*":
-    - all input argument to exectuable
-- "$#":
-    - numbers of command lines variables
+- cat:
+    - write the data which is from standard input to standard output
+    - if u write cat > nameofFile and then command strg+D the data would be written to the file
 
 - if statment:
+    - if u want the command to run only if the previous command worked
+        - cmd1 && cmd2 && cmd3
+    - to run the command if the previous failed
+        - cmd1 || cmd2 || cmd3
+        - cmd || {echo "failed command"; exit 1}
+    using if:
     - one way:
         if condition
         then 
@@ -135,42 +115,85 @@ Linux system:
 
     - if [[ x = "$pwd"]]
         - "" to make the output single word
+    - if u want to user pattern also use ""
+        if [[ "${myvar}" == "*.jpg"]]
+
 - to get user input use $1, $2, $3 so on
 
 - to create subshell use ():
     (cd ..; pwd) -> wont change the currnt directory
-- input output redirect:
-    - < input 
-    - > output
-    - n>& : standard output to n 
-        ex: 2>& stndard error to standard output 
-    - n<& : standard input to n
-    - n>&m -> output m to n
-    - 1>file.txt:
-        direct standard out to file
-    - somecmd >my.file 2>&1
-        - standard output to file and then standard error to standartd output which is file
-    - somecmd 2>&1 >my.file
-        - standard error to standard output which is screen. standard output to file means error still 
-        would be sent to the screen
-    - pipes are exceptions
-        - somecmd 2>& | anothercommand
+
+- std input output:
+    - input output redirect:
+        - < input 
+        - > output
+        - n>& : standard output to n 
+            ex: 2>& stndard error to standard output 
+        - n<& : standard input to n
+        - n>&m -> output m to n
+        - 1>file.txt:
+            direct standard out to file
+        
+        - to direct error and output to file
+            - cmd >& outfile
+
+        - somecmd > my.file 2>&1
+            - standard output to file and then standard error to standartd output which is file
+        - somecmd 2>&1 >my.file
+            - standard error to standard output which is screen. standard output to file means error still 
+            would be sent to the screen
+        - pipes are exceptions
+            - somecmd 2>& | anothercommand
 
 - string operator:
     - ${varname-:default} -> if the value exit return it otherwise return default
-        - ${2-:10} -> return the second parameter pf 10
+    - ${2-:10} -> return the second parameter pf 10
     - ${varname:=defult} -> if the value exit return it otherwise set it to default an return it"s value
     - ${varname:+ default} -> if exists return default otherwise return null
     - ${var:start:length} -> returnt the string starting from start whith the length
-- ${var#expression} : first match from left return the rest
-- ${var##expression} : the last match from left return rest
-- ${var%expression} : first match from right return the rest 
-- ${var%%expression} : the last match from right return the rest 
+    - ${var#expression} : first match from left return the rest
+    - ${var##expression} : the last match from left return rest
+    - ${var%expression} : first match from right return the rest 
+    - ${var%%expression} : the last match from right return the rest 
 
-- Signals:
-    - SIGKILL = 9 = uncondiotional kill
-- to run in background script&
+- vaiables:
+    - to show the enviroment variables:
+        - printenv : would show all the variable 
 
+    - var1=value1:
+        - to set local variable in a process
+        - x=12 -> np space around = is allowed
+    - $var1:
+        - to read the the variable
+
+    - $PATH:
+        - directory where the linux search for command
+        - to add extra PATH
+            - PATH=$PATH:/newpath/..
+        - u can add the current path to the $PATH so u dont want always need to use ./
+            PATH="$PATH:."
+
+    - to make the file exectuable:
+        chmod +x nameOfFile
+
+- calling scripts:
+    - to get the output from script in another script use x = $(script)
+        - testing=$(date)
+    - $? :
+        - to get the exit value of the last script
+        - exit 123
+    - "$@" "$*":
+        - all input argument to exectuable
+    - "$#":
+        - numbers of command lines variables
+
+
+    - seperatre variable name from the surroouding string  
+        var=ahmed
+        - x = ${var}_ali --> x is ahmed_ali 
+- read:
+    - if u only write read it would get the input from the user and store it in var called REPLY
+    - using -p would show the question on the screen and store the answer in variable after the ""
 - sed:
     - s = substitue, i = insert before, a = insert after , -n /p to print the mathced lines
     - stream editor to change data
@@ -245,3 +268,17 @@ Linux system:
         - show lines which do not match the pattern  
     - to specifiy more than one match use -e more than one time
         - grep -e abdel -e ahmed file.txt
+
+- to execute math use (()):
+    - va=$((1+1))
+    - no need to use $ inside the (()) as it is included in the outter ()
+
+- Signals:
+    - SIGKILL = 9 = uncondiotional kill
+
+- initProcess:
+    - kernel creates the first process called init and run it
+    - process which might start automatically are in some locations
+        - first option is: /etc/inittabs 
+        - /etc/init.d folder contain scripts which would start at the begining of the system
+        - scripts are started via entries under /etc/rcX.d  
