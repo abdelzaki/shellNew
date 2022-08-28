@@ -10,6 +10,8 @@ Linux system:
     - file system managment
     - process managment
 
+- shell :
+    - read instruction and convert it to something the OS would understand 
 - initProcess:
     - kernel creates the first process called init and run it
     - process which might start automatically are in some locations
@@ -38,8 +40,19 @@ Linux system:
 - mkdir -p :
     - to make parent directory and child directory 
 
+- find location -name 
+    - ex:
+        - find . -name "ahmed"
+        - find / . -name  "*.c" 
+- if the file doesnot take from standard input and u want to direct an input to it
+    - find . -name="*.c" | rm -> wont work as rm doesnot accept standard input 
+    the soulution is usinf $()
+    - rm $(find . -name "*.c")
+
 - tail -n 1:
     - read the last line in a file
+- tail -n+2:
+    - skip the first 2 and keep reading 
 - head -2 :
     - read the first two line in a file
 
@@ -59,6 +72,11 @@ Linux system:
 - umount:
     - unmout device 
 
+- cat:
+    - write the data which is from standard input to standard output
+
+- echo:
+    - '' or "" to make the string is processed as string not as a special character
 - to show the enviroment variables:
     - printenv : would show all the variable 
 
@@ -82,6 +100,10 @@ Linux system:
 - $? :
     - to get the exit value of the last script
     - exit 123
+- "$@" "$*":
+    - all input argument to exectuable
+- "$#":
+    - numbers of command lines variables
 
 - if statment:
     - one way:
@@ -111,7 +133,39 @@ Linux system:
     - [[ $var = r* ]]
         - u can use double bracket to support regular expression
 
+    - if [[ x = "$pwd"]]
+        - "" to make the output single word
 - to get user input use $1, $2, $3 so on
+
+- to create subshell use ():
+    (cd ..; pwd) -> wont change the currnt directory
+- input output redirect:
+    - < input 
+    - > output
+    - n>& : standard output to n 
+        ex: 2>& stndard error to standard output 
+    - n<& : standard input to n
+    - n>&m -> output m to n
+    - 1>file.txt:
+        direct standard out to file
+    - somecmd >my.file 2>&1
+        - standard output to file and then standard error to standartd output which is file
+    - somecmd 2>&1 >my.file
+        - standard error to standard output which is screen. standard output to file means error still 
+        would be sent to the screen
+    - pipes are exceptions
+        - somecmd 2>& | anothercommand
+
+- string operator:
+    - ${varname-:default} -> if the value exit return it otherwise return default
+        - ${2-:10} -> return the second parameter pf 10
+    - ${varname:=defult} -> if the value exit return it otherwise set it to default an return it"s value
+    - ${varname:+ default} -> if exists return default otherwise return null
+    - ${var:start:length} -> returnt the string starting from start whith the length
+- ${var#expression} : first match from left return the rest
+- ${var##expression} : the last match from left return rest
+- ${var%expression} : first match from right return the rest 
+- ${var%%expression} : the last match from right return the rest 
 
 - Signals:
     - SIGKILL = 9 = uncondiotional kill
@@ -159,9 +213,16 @@ Linux system:
         - sed -n "/th*dfs"/p -> h here is optional
     - [1-9]* : match numbers with undefined length
     - + means at least one
-    - ? zero or one 
+    - ? zero or one means any single character or nothing
+        ex:
+            program.c program.o program.log
+            program.? matches program.c program.o 
     - to work on the line after the line u found 
         - sed "/header/{n ; d}" data1.txt
+    {1..9}:
+        - means the number from 1 to 9 1 2 3 .. 9
+        - echo {1..9}
+        - ls *.{zip,pkg}
     - span of character:
         *+?:
             - * : 11*0 : 10 110 11110 1111110
