@@ -97,9 +97,11 @@ commands:
             command 
         fi
     - another way:
-        if condition; then
-            command 
-        fi
+        if condition; then command ; fi
+    
+    - another way:
+        cmd && another command
+
     comparison u have to give space between bracket [ $x1 -eq $x2 ]:
         -eq -ne -le -ge -gt -lt 
         if [ 1 le 2 ] 
@@ -155,6 +157,7 @@ commands:
     - ${var##expression} : the last match from left return rest
     - ${var%expression} : first match from right return the rest 
     - ${var%%expression} : the last match from right return the rest 
+    - newname="${name%old}new"
 
 - vaiables:
     - to show the enviroment variables:
@@ -282,3 +285,14 @@ commands:
         - first option is: /etc/inittabs 
         - /etc/init.d folder contain scripts which would start at the begining of the system
         - scripts are started via entries under /etc/rcX.d  
+
+- read command:
+    - read each line
+    - cat file | while read ln ; do "${ln}"; done
+
+- cut:
+    - it remove part of the text 
+    ls -l | cut c1-4 -> get the character from 1 to 4
+
+- to substitue character using tr
+    - ls -l | tr "a-z" "A-Z"
