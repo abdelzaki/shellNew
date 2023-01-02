@@ -16,6 +16,40 @@ Linux system:
 - "" -> shell can substitue command
 - '' -> raw string
 
+- visual editor:
+    - general notes:
+        - vi it is the basic visual edior which u can use on any linux distribuation
+        - it has two modes insert mode and command mode 
+        - command mode has functions like save file, delete line or word, undo 
+        - insert mode is the writing mode 
+        - short cut:
+            - change between insert and command mode
+                - i -> insert mode
+                - esc -> command mode
+            - to save the file press:
+                - strg + zz
+                - esc wq!
+            - to insert a new line:
+                - o
+            - undo:
+                - u
+            - delete line:
+                - d
+            - delete a charachter:
+                - x
+
+- administor:
+    - ps -e:
+        - it will show all the active process on the system 
+        - ps -> would show only the process related to this terminal
+    - top:
+         - would show u all the process which are running + the process usage 
+    - kill:
+        - it is used to send signal to a process
+        - the signal uses process ID 
+        - kill -9 101:
+            - this whould end the process (kill because u send 9) to the process which has the pid 101 
+
 commands:
     - ls:
         - to show all files in the directoy use ls 
@@ -37,6 +71,49 @@ commands:
         - the soulution is usinf $()
             - rm $(find . -name "*.c")
 
+    - wildcard:
+        - when u are not working in grep
+            - *: means everything 
+            - {}: range 
+                - ex:
+                    - touch abc{1..8}
+            - ?: one character
+            - []: or 
+                - ex:
+                    - find . -name "abc[123]"
+    - link:
+        - softlink:
+            - the link would point to a file with a different inode
+            - by deleting the original file the data in the softlink is not accessible anymore
+            - ln -s source destination
+        - hardlink:
+            - you create the a link with the same inode 
+            - by deleting the source the data in destination remains 
+            - ln source destination 
+
+    - filter command:
+        - awk:
+            - general notes:
+                - it has three use cases extract data, seach data and replace data
+                - the arguments should be written with '' 
+                - u can decide the delimiter using -F
+                - using $ or print then the command should be withing {}
+                - comparing or relacing then the value should be within ""
+                - variables are defined using $ sign. $1 would represent colum number 1, $NF would represent the last colum
+            - to get a specific colum, this example would print print the colum number 1 and 2
+                - ex:
+                    - awk -F, '{print $1,$2}' data.txt
+
+            - to get the whole line with which has a sepcific word
+                - ex:
+                    - awk ' /wordInsideLineWhichWewant/  {print}' 
+            - to get a line which has a specific field
+                - ex:
+                    - awk '{if($2=="ahmed") print $0;}'
+            - to replace a word
+                - ex:
+                    - cat file | awk '{$2="me"; print $0}'
+
 - tail -n 1:
     - read the last line in a file
 - tail -n+2:
@@ -56,6 +133,9 @@ commands:
 
     - mkdir -p :
         - to make parent directory and child directory 
+    - rm:
+        - it is used remove 
+        - rm -r file 
 
 - kill:
     - send signal tp process based on PID 
