@@ -50,6 +50,24 @@ Linux system:
         - kill -9 101:
             - this whould end the process (kill because u send 9) to the process which has the pid 101 
 
+- Network:
+    - NIC: network interface card
+    - curl: 
+        - it is used to call http and see if the page is avaliable
+        - curl -O -> to download a link from the website 
+    - ping:
+        - it is used to see that the ip is reachable 
+- FTP:
+    - file transfter protocol 
+    - the default port is 21 
+    
+
+- download software:
+    - wget: 
+        - world wide get
+        - ex:
+            - wget http://website.com
+
 commands:
     - ls:
         - to show all files in the directoy use ls 
