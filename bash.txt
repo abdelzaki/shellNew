@@ -139,21 +139,20 @@ commands:
 - head -2 :
     - read the first two line in a file
 
+- touch:
+    - to create a file use 
+- cp:
+    - to copy a file
+    - cp -R /folder/ /anotherFolder
 
-    - touch:
-        - to create a file use 
-    - cp:
-        - to copy a file
-        - cp -R /folder/ /anotherFolder
+- mv:
+    - to move file 
 
-    - mv:
-        - to move file 
-
-    - mkdir -p :
-        - to make parent directory and child directory 
-    - rm:
-        - it is used remove 
-        - rm -r file 
+- mkdir -p :
+    - to make parent directory and child directory 
+- rm:
+    - it is used remove 
+    - rm -r file 
 
 - kill:
     - send signal tp process based on PID 
@@ -232,20 +231,13 @@ commands:
 - std input output:
     - input output redirect:
         - < input 
-        - > output
-        - n>& : standard output to n 
-            ex: 2>& stndard error to standard output 
-        - n<& : standard input to n
-        - n>&m -> output m to n
-        - 1>file.txt:
-            direct standard out to file
-        
-        - to direct error and output to file
-            - cmd >& outfile
-
+        - > output 
+        - cmd &> file       
+            - to direct error and output to file
+            
         - somecmd > my.file 2>&1
             - standard output to file and then standard error to standartd output which is file
-        - somecmd 2>&1 >my.file
+        - somecmd 2>&1 > my.file
             - standard error to standard output which is screen. standard output to file means error still 
             would be sent to the screen
         - pipes are exceptions
@@ -332,6 +324,11 @@ commands:
         awk -F, or awk -F- -> change seperator to , or - 
 
 - regular expression:
+    - regular expression is divided into basic and extended regular expression
+    - basic:    
+        - ^ $ . [] *
+    - extendedn:
+        - () {} ? + |
     - ^start :start with matches if the pattern at the begining of the line 
         ^ahmed : if ahmed at the begining of the line matches it 
     - end$ : end with
@@ -374,13 +371,19 @@ commands:
             - (yes|Yes) 
             - u can reference it using \n where n is from 1 to 9
             - echo `echo "$*" | sed "s/<[^>]*>\([^<]*\)<.*/\1/" | sed "s/ ..:..:..//g"`
-         
+        - () and | :
+            - to apply expression with or
+            - grep -E "^(ab|cd)"" 
+                - word which start with ab or cd 
+            - grep -E "^ab|cd"
+                - word which start with ab or has cd        
 - grep:
+    - grep -option regex
     - print the matched expression
     - grep -i : case insenstive
     - grep -v : not match
     - grep "expression" file
-    - -E to use regular expression
+    - -E to use extended regular expression-> () {} ? +
     - search for pattern
     - grep options pattern file 
     - grep -v :
